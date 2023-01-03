@@ -1,0 +1,15 @@
+// Login to fiberhome modem 
+// Paste this script inside browser console
+
+$.ajax({
+    url: '/cgi-bin/ajax?ajaxmethod=get_allwan_info',
+    success: (data)=>{
+        data = JSON.parse(data) 
+        data.wan.forEach(v => {
+            if(v.AddressingType == 'PPPoE'){
+                console.log("Username: "+ v.Username)
+                console.log("Password: "+ fhdecrypt(v.Password) )
+            }
+        })    
+    }
+})
